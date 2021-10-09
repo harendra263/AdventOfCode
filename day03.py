@@ -51,4 +51,20 @@ with open("data/day03.txt") as f:
 print(multi_claimed(claims))
 
 
+def non_overalapping_claim(claims: List[str]) -> int:
+    rectangles = [Rectangle.from_claim(claim) for claim in claims]
+    counts = coverage(rectangles)
+    good_rectangles = [rectangle for rectangle in rectangles
+                       if all(counts[coord]==1 for coord in rectangle.all_squares())]
+    
+
+
+    assert len(good_rectangles) ==1
+
+    return good_rectangles[0].id
+
+
+
+
+print(non_overalapping_claim(claims))
 
