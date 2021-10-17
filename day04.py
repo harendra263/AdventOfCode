@@ -77,8 +77,35 @@ def sleepiest_guard(naps: List[Nap])-> int:
         print(sleep_counts)
     return sleep_counts.most_common(1)[0][0]
 
+
+
+
+def most_common_sleepy_minute(naps: List[Nap], guard_id: int)-> int:
+    minutes = Counter()
+
+    for nap in naps:
+        if nap.guard_id == guard_id:
+            for minute in range(nap.sleep, nap.wake):
+                minutes[minute] += 1
+
+    [(minute1, count1), (minute2, count2)] = minutes.most_common(2)
+    assert count1 > count2
+    return minute1
+
+# print(sleepiest_guard(NAPS))
 # assert sleepiest_guard(NAPS)  == 10
 
-print(sleepiest_guard(NAPS))
+# assert most_common_sleepy_minute(NAPS, guard_id= 10) == 24
+
+
+with open("data/day04.txt") as f:
+    entries = [line for line in f]
+    naps = find_naps(entries)
+
+sleepiest_guard_id  = sleepiest_guard(naps)
+
+sleepiest_minute = most_common_sleepy_minute(naps, sleepiest_guard_id)
+print(sleepiest_minute * sleepiest_guard_id)
+
 
 
