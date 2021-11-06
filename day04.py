@@ -16,7 +16,7 @@ RAW = """[1518-11-01 00:00] Guard #10 begins shift
 [1518-11-05 00:45] falls asleep
 [1518-11-05 00:55] wakes up""".split("\n")
 
-from typing import NamedTuple, List
+from typing import NamedTuple, List, Tuple
 import re
 
 rgx = r"\[([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2})\] (.*)"
@@ -108,4 +108,20 @@ sleepiest_minute = most_common_sleepy_minute(naps, sleepiest_guard_id)
 print(sleepiest_minute * sleepiest_guard_id)
 
 
+def most_frequently_asleep_minute(naps: List[Nap])-> Tuple[int, int]:
+    counts = Counter()
+    for nap in naps:
+        for minute in range(nap.sleep, nap.wake):
+            counts[(nap.guard_id, minute)] += 1
+
+    [((gid1, min1), count1), ((gid2, min2), count2)] = counts.most_common(2)
+
+    assert count1 > count2
+
+    return (gid1, min1)
+
+assert most_frequently_asleep_minute(NAPS) == (99, 45)
+
+guard_id, minute = most_frequently_asleep_minute(naps)
+print(guard_id, minute, guard_id * minute)
 
