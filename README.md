@@ -1,5 +1,4 @@
-## ADVENT OF CODE 2018
+## ADVENT OF CODE
 
- Day 02 complete solution.
 
  Credit :- Joel Grus
