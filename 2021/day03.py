@@ -80,15 +80,15 @@ def co2_scrubber_rating(numbers: List[str]) -> str:
                 zeros += 1
             elif number[i] == '1':
                 ones += 1
-        
+
         if zeros <= ones:
             numbers = [n for n in numbers if n[i] == '0']
         else:
             numbers = [n for n in numbers if n[i] == '1']
-        
+
         if len(numbers) == 1:
             return numbers[0]
-    
+
     raise ValueError("No solution found")
 
 

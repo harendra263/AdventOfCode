@@ -44,10 +44,7 @@ class Board:
     def is_winner(self) -> bool:
         if any(rc == self.nc for rc in self.row_counts):
             return True
-        if any(cc == self.nr for cc in self.col_counts):
-            return True
-        else:
-            return False
+        return any((cc == self.nr for cc in self.col_counts))
     
     def score(self, number: int) -> int:
         """Return the score of the board"""
@@ -71,9 +68,6 @@ class Game:
     
     def play(self) -> int:
         """Play the game and return the final score of the winning board"""
-        for number in self.numbers:
-            for board in self.boards:
-                pass
 
     
 

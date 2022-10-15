@@ -24,7 +24,7 @@ def checkSum(ids: List[str]) -> int:
             num_twos += 1
         if 3 in ccv:
             num_threes += 1
-    
+
     return num_twos * num_threes
 
 
@@ -36,13 +36,13 @@ print(checkSum(ids))
 
 def characters_in_common(ids: List[str]) -> str:
     leave_one_outs = Counter()
-    
+
     for box_id in ids:
         for i in range(len(box_id)):
-            leave_one_out = tuple(box_id[:i] + "_" + box_id[(i+1):])
+            leave_one_out = tuple(f"{box_id[:i]}_{box_id[i + 1:]}")
             leave_one_outs[leave_one_out] += 1
-        
-    
+
+
     [(best, count),(not_best, not_best_count)] = leave_one_outs.most_common(2)
 
     assert count == 2

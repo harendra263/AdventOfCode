@@ -14,11 +14,7 @@ RAW = """199
 INPUT = [int(x) for x in RAW.split('\n')]
 
 def count_increases(depths: List[int], gap: int = 1) -> int:
-    count = 0
-    for i in range(len(depths)- gap):
-        if depths[i] < depths[i + gap]:
-            count += 1
-    return count
+    return sum(depths[i] < depths[i + gap] for i in range(len(depths)- gap))
 
 # print(count_increases(INPUT, 1))
 # assert count_increases(INPUT,1) == 7

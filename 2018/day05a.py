@@ -8,7 +8,7 @@ def reduct(polymer: str)-> str:
     did_reduce = True
     while did_reduce :
         did_reduce = False
-        
+
         for i in range(1, len(polymer)):
             unit1 = polymer[i-1]
             unit2 = polymer[i]

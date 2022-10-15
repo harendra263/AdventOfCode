@@ -46,12 +46,10 @@ def find_naps(entries: List[str]) -> List[Nap]:
         year, month, day, hour, minute, comment = re.match(rgx,entry).groups()
         ts = Timestamp(int(year),  int(month), int(day), int(hour), int(minute))
 
-        guard = re.match(guard_id_rgx,comment)
-
-        if guard:
+        if guard := re.match(guard_id_rgx, comment):
             assert sleep is None and wake is None
             guard_id = int(guard.groups()[0])
-        
+
         elif "falls asleep" in comment:
             assert guard_id is not None and sleep is None and wake is None
             sleep = int(minute)
@@ -61,7 +59,7 @@ def find_naps(entries: List[str]) -> List[Nap]:
             wake = int(minute)
             naps.append(Nap(guard_id, sleep,wake))
             sleep = wake = None
-    
+
     return naps
 
 
@@ -99,7 +97,7 @@ def most_common_sleepy_minute(naps: List[Nap], guard_id: int)-> int:
 
 
 with open("data/day04.txt") as f:
-    entries = [line for line in f]
+    entries = list(f)
     naps = find_naps(entries)
 
 sleepiest_guard_id  = sleepiest_guard(naps)
